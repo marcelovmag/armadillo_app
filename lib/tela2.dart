@@ -4,13 +4,46 @@ import 'package:flutter/material.dart';
 class Tela2 extends StatelessWidget {
   @override
   build(context) {
-    return Column(
-      children: [
-        const Text("Texto 1 da tela 2"),
-        const Text("Texto 2 da tela 2"),
-        const Text("Texto 3 da tela 2"),
-        Container(height: 40, width: 120, color: Colors.green),
-      ],
+    return Center(
+      child: Column(
+        children: [
+          Column(
+            children: [
+              const Text(
+                "ARMADILLO",
+                style:
+                    TextStyle(fontSize: 48.00, fontFamily: 'BarlowCondensed'),
+              ),
+              const Text(
+                "PAINEL DE CONTROLE",
+                style:
+                    TextStyle(fontSize: 22.00, fontFamily: 'BarlowCondensed'),
+              ),
+              Image.asset(
+                PreferenciaTema.logo,
+                width: 200,
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("SERVO X: "),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("SERVO Y: "),
+                ],
+              ),
+              const Text("CÂMERA"),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

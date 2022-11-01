@@ -1,5 +1,6 @@
 import 'package:armadillo_app/tela1.dart';
 import 'package:armadillo_app/tela2.dart';
+import 'package:armadillo_app/settings.dart';
 import 'package:armadillo_app/preferencia_tema.dart';
 import 'package:flutter/material.dart';
 
@@ -40,6 +41,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   TextEditingController txtSenha =
       TextEditingController(); // controller da caixa de texto de senha, no login
   bool login = false; // status de logado (ou não)
+  bool settings = false;
 
   @override
   build(context) {
@@ -53,28 +55,61 @@ class _AppState extends State<App> with WidgetsBindingObserver {
           brightness: tema,
         ),
         home: Scaffold(
-          floatingActionButton:
-              login // testa se está logado, pra só então exibir o botão de deslogar
-                  ? FloatingActionButton(
-                      backgroundColor: PreferenciaTema.azul,
-                      onPressed: () {
-                        setState(() {
-                          login = false;
-                        });
-                      },
-                      child: const Text("Logout"))
-                  : null,
           appBar: login // testa se está logado, pra só então exibir a AppBar
               ? AppBar(
-                  title: id == 0
-                      ? Text("Bem-vindo,  ${txtUsuario.text} - Tela 1")
-                      : Text("Bem-vindo,  ${txtUsuario.text} - Tela 2"))
+                  title: settings
+                      ? const Text("Configurações")
+                      : id == 0
+                          ? Text("Bem-vindo,  ${txtUsuario.text} - Tela 1")
+                          : Text("Bem-vindo,  ${txtUsuario.text} - Tela 2"),
+                  actions: [
+                    PopupMenuButton(
+                        itemBuilder: (context) => [
+                              PopupMenuItem(
+                                  child: ListTile(
+                                leading: const Icon(Icons.logout),
+                                title: const Text('Logout'),
+                                onTap: () {
+                                  setState(() {
+                                    login = false;
+                                    txtUsuario.text = '';
+                                    txtSenha.text = '';
+                                    id = 0;
+                                    settings = false;
+                                  });
+                                },
+                              )),
+                              PopupMenuItem(
+                                  child: ListTile(
+                                leading: settings
+                                    ? const Icon(Icons.arrow_back_rounded)
+                                    : const Icon(Icons.settings),
+                                title: settings
+                                    ? const Text('Voltar')
+                                    : const Text('Configurações'),
+                                onTap: () {
+                                  setState(() {
+                                    settings = !settings;
+                                  });
+                                },
+                              )),
+                              PopupMenuItem(
+                                  child: ListTile(
+                                leading: const Icon(Icons.info),
+                                title: const Text('Info'),
+                                onTap: () {},
+                              ))
+                            ])
+                  ],
+                )
               : null,
           body:
               login // testa se está logado, pra exibir a tela de login, ou as telas principais
-                  ? id == 0
-                      ? Tela1()
-                      : Tela2()
+                  ? settings
+                      ? Settings()
+                      : id == 0
+                          ? Tela1()
+                          : Tela2()
                   : Center(
                       // tela de login
                       child: Column(
@@ -148,24 +183,26 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                     ),
           bottomNavigationBar:
               login // testa se está logado, pra só então exibir a bottomNavigationBar
-                  ? BottomNavigationBar(
-                      selectedItemColor: PreferenciaTema.azul,
-                      items: const [
-                        BottomNavigationBarItem(
-                            icon: Icon(Icons.assessment_outlined),
-                            label: "Monitoramento"),
-                        BottomNavigationBarItem(
-                            icon: Icon(Icons.radio_button_checked),
-                            label: "Painel de Controle"),
-                      ],
-                      currentIndex: id, // usa da var id como index
-                      // muda o id de acordo com o selecionado no app
-                      onTap: (i) {
-                        setState(() {
-                          id = i;
-                        });
-                      },
-                    )
+                  ? !settings
+                      ? BottomNavigationBar(
+                          selectedItemColor: PreferenciaTema.azul,
+                          items: const [
+                            BottomNavigationBarItem(
+                                icon: Icon(Icons.assessment_outlined),
+                                label: "Monitoramento"),
+                            BottomNavigationBarItem(
+                                icon: Icon(Icons.radio_button_checked),
+                                label: "Painel de Controle"),
+                          ],
+                          currentIndex: id, // usa da var id como index
+                          // muda o id de acordo com o selecionado no app
+                          onTap: (i) {
+                            setState(() {
+                              id = i;
+                            });
+                          },
+                        )
+                      : null
                   : null,
         ),
       ),
