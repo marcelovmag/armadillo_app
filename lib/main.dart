@@ -1,9 +1,7 @@
-//import 'package:armadillo_app/preferencia_tema.dart';
+import 'package:armadillo_app/tela1.dart';
+import 'package:armadillo_app/tela2.dart';
+import 'package:armadillo_app/preferencia_tema.dart';
 import 'package:flutter/material.dart';
-
-String logo = 'assets/images/armadilloIndigo.png';
-MaterialColor azul = Colors.indigo;
-Brightness tema = Brightness.dark;
 
 void main() {
   runApp(App());
@@ -51,14 +49,14 @@ class _AppState extends State<App> with WidgetsBindingObserver {
         title: 'Armadillo App',
         debugShowCheckedModeBanner: false, // desabilita tremzinho de debug
         theme: ThemeData(
-          primarySwatch: azul,
+          primarySwatch: PreferenciaTema.azul,
           brightness: tema,
         ),
         home: Scaffold(
           floatingActionButton:
               login // testa se está logado, pra só então exibir o botão de deslogar
                   ? FloatingActionButton(
-                      backgroundColor: azul,
+                      backgroundColor: PreferenciaTema.azul,
                       onPressed: () {
                         setState(() {
                           login = false;
@@ -93,7 +91,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                             ),
                             Flexible(
                               flex: 10,
-                              child: Image.asset(logo),
+                              child: Image.asset(PreferenciaTema.logo),
                             ),
                             const Spacer(
                               flex: 3,
@@ -151,7 +149,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
           bottomNavigationBar:
               login // testa se está logado, pra só então exibir a bottomNavigationBar
                   ? BottomNavigationBar(
-                      selectedItemColor: azul,
+                      selectedItemColor: PreferenciaTema.azul,
                       items: const [
                         BottomNavigationBarItem(
                             icon: Icon(Icons.assessment_outlined),
@@ -172,94 +170,5 @@ class _AppState extends State<App> with WidgetsBindingObserver {
         ),
       ),
     );
-  }
-}
-
-class Tela1 extends StatelessWidget {
-  @override
-  build(context) {
-    return Center(
-      child: Column(
-        children: [
-          Column(
-            children: [
-              const Text(
-                "ARMADILLO",
-                style:
-                    TextStyle(fontSize: 48.00, fontFamily: 'BarlowCondensed'),
-              ),
-              const Text(
-                "MONITORAMENTO",
-                style:
-                    TextStyle(fontSize: 22.00, fontFamily: 'BarlowCondensed'),
-              ),
-              Image.asset(
-                logo,
-                width: 200,
-              ),
-            ],
-          ),
-          Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("SERVO X: "),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("SERVO Y: "),
-                ],
-              ),
-              const Text("CÂMERA"),
-              const Text("ULTIMA IMAGEM"),
-              Container(height: 270, width: 480, color: Colors.grey),
-            ],
-          ),
-          Column(
-            children: [
-              TextButton(onPressed: () {}, child: const Text("EXPANDIR LOGS"))
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class Tela2 extends StatelessWidget {
-  @override
-  build(context) {
-    return Column(
-      children: [
-        const Text("Texto 1 da tela 2"),
-        const Text("Texto 2 da tela 2"),
-        const Text("Texto 3 da tela 2"),
-        Container(height: 40, width: 120, color: Colors.green),
-      ],
-    );
-  }
-}
-
-class PreferenciaTema {
-  static ValueNotifier<Brightness> tema = ValueNotifier(Brightness.dark);
-
-  static setTema() {
-    tema.value = WidgetsBinding.instance.platformDispatcher.platformBrightness;
-    attCores();
-  }
-
-  static attCores() {
-    bool isDark = tema.value == Brightness.dark;
-
-    if (isDark) {
-      logo = 'assets/images/armadilloIndigo.png';
-      azul = Colors.indigo;
-    } else {
-      logo = 'assets/images/armadillo.png';
-      azul = Colors.blue;
-    }
   }
 }
