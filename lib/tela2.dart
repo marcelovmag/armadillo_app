@@ -29,14 +29,14 @@ class Tela2 extends StatelessWidget {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("SERVO X: "),
+                children: const [
+                  Text("SERVO X: "),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("SERVO Y: "),
+                children: const [
+                  Text("SERVO Y: "),
                 ],
               ),
               const Text("CÂMERA"),

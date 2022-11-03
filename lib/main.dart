@@ -116,7 +116,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Flexible(
-                              flex: 12,
+                              flex: 24,
                               child: Text(
                                 "ARMADILLO",
                                 style: TextStyle(
@@ -125,38 +125,56 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                               ),
                             ),
                             Flexible(
-                              flex: 10,
+                              flex: 20,
                               child: Image.asset(PreferenciaTema.logo),
                             ),
                             const Spacer(
-                              flex: 3,
+                              flex: 6,
                             ),
-                            const Flexible(flex: 10, child: Text("Faça Login")),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                  120.0, 30.0, 120.0, 15.0),
-                              child: TextField(
-                                  controller: txtUsuario,
-                                  decoration: const InputDecoration(
-                                    label: Text("Usuário"),
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8.0))),
-                                  )),
+                            const Flexible(
+                                flex: 10,
+                                child: Text(
+                                  "Faça Login",
+                                  style: TextStyle(),
+                                )),
+                            const Spacer(),
+                            Row(
+                              children: [
+                                const Spacer(),
+                                Flexible(
+                                  flex: 4,
+                                  child: TextField(
+                                      controller: txtUsuario,
+                                      decoration: const InputDecoration(
+                                        label: Text("Usuário"),
+                                        border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(8.0))),
+                                      )),
+                                ),
+                                const Spacer(),
+                              ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                  120.0, 30.0, 120.0, 15.0),
-                              child: TextField(
-                                  controller: txtSenha,
-                                  obscureText: true,
-                                  decoration: const InputDecoration(
-                                    label: Text("Senha"),
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8.0))),
-                                  )),
+                            const Spacer(flex: 1),
+                            Row(
+                              children: [
+                                const Spacer(),
+                                Flexible(
+                                  flex: 4,
+                                  child: TextField(
+                                      controller: txtSenha,
+                                      obscureText: true,
+                                      decoration: const InputDecoration(
+                                        label: Text("Senha"),
+                                        border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(8.0))),
+                                      )),
+                                ),
+                                const Spacer(),
+                              ],
                             ),
+                            const Spacer(),
                             SizedBox(
                               height: 35.0,
                               width: 90.0,
