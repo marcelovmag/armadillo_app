@@ -1,15 +1,18 @@
 import 'package:armadillo_app/preferencia_tema.dart';
 import 'package:flutter/material.dart';
+import 'package:armadillo_app/tela2.dart';
 
 class Tela1 extends StatelessWidget {
-  String servox = 'desconectado';
-  String servoy = 'desconectado';
-  IconData onoff = Icons.camera;
+  String servox = ((Servos.servoX * 100).round() / 100).toString();
+  String servoy = ((Servos.servoY * 100).round() / 100).toString();
+  Color onoff = PreferenciaTema.azul;
+  bool logs = false;
 
   @override
   build(context) {
     return Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Column(
             children: [
@@ -34,11 +37,13 @@ class Tela1 extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("SERVO X: "),
+                  const Text("Servo X: ",
+                      style: TextStyle(fontFamily: 'SpaceGrotesk')),
                   Text(
                     servox,
                     style: const TextStyle(
                       backgroundColor: Colors.grey,
+                      fontFamily: 'SpaceGrotesk',
                     ),
                   ),
                 ],
@@ -46,24 +51,40 @@ class Tela1 extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("SERVO Y: "),
+                  const Text("Servo Y: ",
+                      style: TextStyle(fontFamily: 'SpaceGrotesk')),
                   Text(
                     servoy,
                     style: const TextStyle(
                       backgroundColor: Colors.grey,
+                      fontFamily: 'SpaceGrotesk',
                     ),
                   )
                 ],
               ),
-              const Text("CÂMERA"),
-              Icon(onoff),
-              const Text("ULTIMA IMAGEM"),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text("Câmera",
+                  style: TextStyle(fontFamily: 'SpaceGrotesk')),
+              Icon(Icons.camera_alt, color: onoff),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text("Última imagem",
+                  style: TextStyle(fontFamily: 'SpaceGrotesk')),
               Container(height: 270, width: 480, color: Colors.grey),
+              const SizedBox(
+                height: 20,
+              ),
             ],
           ),
           Column(
             children: [
-              TextButton(onPressed: () {}, child: const Text("EXPANDIR LOGS"))
+              TextButton(
+                  onPressed: () {},
+                  child: const Text("EXPANDIR LOGS",
+                      style: TextStyle(fontFamily: 'SpaceGrotesk'))),
             ],
           ),
         ],

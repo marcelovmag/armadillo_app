@@ -83,6 +83,22 @@ flutter:
     - family: BarlowCondensed
       fonts:
        - asset: assets/fonts/BarlowCondensed.ttf
+
+    - family: Inter
+      fonts:
+       - asset: assets/fonts/Inter.ttf
+
+    - family: Roboto
+      fonts:
+       - asset: assets/fonts/Roboto.ttf
+
+    - family: WorkSans
+      fonts:
+       - asset: assets/fonts/WorkSans.ttf
+
+    - family: SpaceGrotesk
+      fonts:
+       - asset: assets/fonts/SpaceGrotesk.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
