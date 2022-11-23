@@ -3,6 +3,7 @@ import 'package:armadillo_app/tela2.dart';
 import 'package:armadillo_app/settings.dart';
 import 'package:armadillo_app/preferencia_tema.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 void main() {
   runApp(App());
