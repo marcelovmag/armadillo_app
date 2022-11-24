@@ -1,6 +1,6 @@
 import 'package:armadillo_app/preferencia_tema.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'atuadores.dart';
 
 class Tela1 extends StatelessWidget {
   String servox = ((Servos.servoX * 100).round() / 100).toString();
