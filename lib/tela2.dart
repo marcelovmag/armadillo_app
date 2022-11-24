@@ -3,8 +3,7 @@ import 'package:armadillo_app/atuadores.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
-bool isCamera = false;
-String camera = 'LIGA';
+bool isManual = false;
 
 class Tela2 extends StatefulWidget {
   @override
@@ -34,64 +33,79 @@ class _Tela2State extends State<Tela2> {
                 PreferenciaTema.logo,
                 width: 200,
               ),
-            ],
-          ),
-          Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Servo X: ",
-                      style: TextStyle(fontFamily: 'SpaceGrotesk')),
-                  Slider(
-                      value: Servos.servoX,
-                      min: 0.00,
-                      max: 100.00,
-                      divisions: 10000,
-                      onChanged: (value) {
-                        setState(() {
-                          Servos.servoX = value;
-                        });
-                      }),
-                  Text(((Servos.servoX * 100).round() / 100).toString()),
-                ],
+              const Text(
+                "Modo de Controle Manual",
+                style:
+                    TextStyle(fontSize: 22.00, fontFamily: 'BarlowCondensed'),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Servo Y: ",
-                      style: TextStyle(fontFamily: 'SpaceGrotesk')),
-                  Slider(
-                      value: Servos.servoY,
-                      min: 0.00,
-                      max: 100.00,
-                      divisions: 10000,
-                      onChanged: (value) {
-                        setState(() {
-                          Servos.servoY = value;
-                        });
-                      }),
-                  Text(((Servos.servoY * 100).round() / 100).toString()),
-                ],
+              Switch(
+                value: isManual,
+                onChanged: (manual) {
+                  setState(() {
+                    isManual = manual;
+                  });
+                },
               ),
             ],
           ),
-          Wrap(
-            direction: Axis.horizontal,
-            spacing: 20.0,
-            children: [
-              Column(
-                children: [
-                  const Text("Ativar Alarme",
-                      style: TextStyle(fontFamily: 'SpaceGrotesk')),
-                  Switch(
-                    value: Servos.alarme,
-                    onChanged: (alarme) {},
-                  ),
-                ],
-              ),
-            ],
-          ),
+          if (isManual)
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Servo X: ",
+                        style: TextStyle(fontFamily: 'SpaceGrotesk')),
+                    Slider(
+                        value: Servos.servoX,
+                        min: 0.00,
+                        max: 100.00,
+                        divisions: 10000,
+                        onChanged: (value) {
+                          setState(() {
+                            Servos.servoX = value;
+                          });
+                        }),
+                    Text(((Servos.servoX * 100).round() / 100).toString()),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Servo Y: ",
+                        style: TextStyle(fontFamily: 'SpaceGrotesk')),
+                    Slider(
+                        value: Servos.servoY,
+                        min: 0.00,
+                        max: 100.00,
+                        divisions: 10000,
+                        onChanged: (value) {
+                          setState(() {
+                            Servos.servoY = value;
+                          });
+                        }),
+                    Text(((Servos.servoY * 100).round() / 100).toString()),
+                  ],
+                ),
+              ],
+            ),
+          if (true)
+            Wrap(
+              direction: Axis.horizontal,
+              spacing: 20.0,
+              children: [
+                Column(
+                  children: [
+                    const Text("Ativar Alarme",
+                        style: TextStyle(fontFamily: 'SpaceGrotesk')),
+                    Switch(
+                      value: Servos.alarme,
+                      onChanged: (alarme) {},
+                    ),
+                  ],
+                ),
+              ],
+            ),
         ],
       ),
     );
