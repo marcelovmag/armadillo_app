@@ -1,14 +1,8 @@
 import 'package:armadillo_app/preferencia_tema.dart';
+import 'package:armadillo_app/atuadores.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
-bool isCamera = false;
-String camera = 'LIGA';
-
-class Servos {
-  static double servoX = 0;
-  static double servoY = 0;
-}
+bool isManual = false;
 
 class Tela2 extends StatefulWidget {
   @override
@@ -40,75 +34,84 @@ class _Tela2State extends State<Tela2> {
               ),
             ],
           ),
-          Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Servo X: ",
-                      style: TextStyle(fontFamily: 'SpaceGrotesk')),
-                  Slider(
-                      value: Servos.servoX,
-                      min: 0.00,
-                      max: 100.00,
-                      divisions: 10000,
-                      onChanged: (value) {
-                        setState(() {
-                          Servos.servoX = value;
-                        });
-                      }),
-                  Text(((Servos.servoX * 100).round() / 100).toString()),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Servo Y: ",
-                      style: TextStyle(fontFamily: 'SpaceGrotesk')),
-                  Slider(
-                      value: Servos.servoY,
-                      min: 0.00,
-                      max: 100.00,
-                      divisions: 10000,
-                      onChanged: (value) {
-                        setState(() {
-                          Servos.servoY = value;
-                        });
-                      }),
-                  Text(((Servos.servoY * 100).round() / 100).toString()),
-                ],
-              ),
-            ],
-          ),
-          Column(
-            children: [
-              const Text("Câmera",
-                  style: TextStyle(fontFamily: 'SpaceGrotesk')),
-              const SizedBox(
-                height: 10,
-              ),
-              ElevatedButton(
-                  onPressed: () {
+          SizedBox(
+            height: 180,
+            child: Column(
+              children: [
+                const Text(
+                  "Modo de Controle Manual",
+                  style: TextStyle(fontSize: 14.00, fontFamily: 'SpaceGrotesk'),
+                ),
+                Switch(
+                  value: isManual,
+                  onChanged: (manual) {
                     setState(() {
-                      isCamera ? camera = 'DESLIGA' : camera = 'LIGA';
-                      isCamera = !isCamera;
+                      isManual = manual;
                     });
                   },
-                  child: Text(camera,
-                      style: const TextStyle(fontFamily: 'SpaceGrotesk'))),
-              const SizedBox(
-                height: 5,
-              ),
-              OutlinedButton(
-                  onPressed: () {
-                    if (isCamera) {
-                      // tirar foto
-                    }
-                  },
-                  child: const Text('TIRAR FOTO',
-                      style: TextStyle(fontFamily: 'SpaceGrotesk'))),
-            ],
-          )
+                ),
+                if (isManual)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Servo X: ",
+                          style: TextStyle(fontFamily: 'SpaceGrotesk')),
+                      Slider(
+                          value: Servos.servoX,
+                          min: 0.00,
+                          max: 100.00,
+                          divisions: 10000,
+                          onChanged: (value) {
+                            setState(() {
+                              Servos.servoX = value;
+                            });
+                          }),
+                      Text(((Servos.servoX * 100).round() / 100).toString()),
+                    ],
+                  ),
+                if (isManual)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Servo Y: ",
+                          style: TextStyle(fontFamily: 'SpaceGrotesk')),
+                      Slider(
+                          value: Servos.servoY,
+                          min: 0.00,
+                          max: 100.00,
+                          divisions: 10000,
+                          onChanged: (value) {
+                            setState(() {
+                              Servos.servoY = value;
+                            });
+                          }),
+                      Text(((Servos.servoY * 100).round() / 100).toString()),
+                    ],
+                  ),
+              ],
+            ),
+          ),
+          if (true)
+            Wrap(
+              direction: Axis.horizontal,
+              spacing: 20.0,
+              children: [
+                Column(
+                  children: [
+                    const Text("Alarme",
+                        style: TextStyle(fontFamily: 'SpaceGrotesk')),
+                    Switch(
+                      value: Servos.alarme,
+                      onChanged: (alarme) {
+                        setState(() {
+                          Servos.alarme = alarme;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
         ],
       ),
     );

@@ -1,11 +1,10 @@
 import 'package:armadillo_app/preferencia_tema.dart';
+import 'package:armadillo_app/atuadores.dart';
 import 'package:flutter/material.dart';
-import 'atuadores.dart';
 
 class Tela1 extends StatelessWidget {
   String servox = ((Servos.servoX * 100).round() / 100).toString();
   String servoy = ((Servos.servoY * 100).round() / 100).toString();
-  Color onoff = PreferenciaTema.azul;
   bool logs = false;
 
   @override
@@ -65,20 +64,38 @@ class Tela1 extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const Text("Câmera",
-                  style: TextStyle(fontFamily: 'SpaceGrotesk')),
-              Icon(Icons.camera_alt, color: onoff),
-              const SizedBox(
-                height: 20,
+              Wrap(
+                direction: Axis.horizontal,
+                spacing: 20.0,
+                children: [
+                  Column(
+                    children: [
+                      const Text("Alarme",
+                          style: TextStyle(fontFamily: 'SpaceGrotesk')),
+                      Icon(Icons.volume_up,
+                          color: Servos.alarme
+                              ? Colors.red
+                              : PreferenciaTema.azul),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      const Text("Portão",
+                          style: TextStyle(fontFamily: 'SpaceGrotesk')),
+                      Icon(Icons.door_front_door,
+                          color: Servos.alarme
+                              ? Colors.red
+                              : PreferenciaTema.azul),
+                    ],
+                  ),
+                ],
               ),
-              const Text("Última imagem",
-                  style: TextStyle(fontFamily: 'SpaceGrotesk')),
-              Container(height: 270, width: 480, color: Colors.grey),
               const SizedBox(
                 height: 20,
               ),
             ],
           ),
+          /*
           Column(
             children: [
               TextButton(
@@ -87,6 +104,7 @@ class Tela1 extends StatelessWidget {
                       style: TextStyle(fontFamily: 'SpaceGrotesk'))),
             ],
           ),
+          */
         ],
       ),
     );
