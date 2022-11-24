@@ -7,7 +7,6 @@ import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 class Tela1 extends StatelessWidget {
   String servox = ((Servos.servoX * 100).round() / 100).toString();
   String servoy = ((Servos.servoY * 100).round() / 100).toString();
-  Color onoff = PreferenciaTema.azul;
   bool logs = false;
 
   @override
@@ -73,23 +72,22 @@ class Tela1 extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      const Text("Câmera",
-                          style: TextStyle(fontFamily: 'SpaceGrotesk')),
-                      Icon(Icons.camera_alt, color: onoff),
-                    ],
-                  ),
-                  Column(
-                    children: [
                       const Text("Alarme",
                           style: TextStyle(fontFamily: 'SpaceGrotesk')),
-                      Icon(Icons.volume_up, color: onoff),
+                      Icon(Icons.volume_up,
+                          color: Servos.alarme
+                              ? Colors.red
+                              : PreferenciaTema.azul),
                     ],
                   ),
                   Column(
                     children: [
                       const Text("Portão",
                           style: TextStyle(fontFamily: 'SpaceGrotesk')),
-                      Icon(Icons.door_front_door, color: onoff),
+                      Icon(Icons.door_front_door,
+                          color: Servos.alarme
+                              ? Colors.red
+                              : PreferenciaTema.azul),
                     ],
                   ),
                 ],

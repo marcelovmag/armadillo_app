@@ -14,6 +14,10 @@ class App extends StatefulWidget {
   State<App> createState() => _AppState();
 }
 
+class Login {
+  static String user = '';
+}
+
 class _AppState extends State<App> with WidgetsBindingObserver {
   // seta Observer pra mudar tema
   @override
@@ -56,53 +60,80 @@ class _AppState extends State<App> with WidgetsBindingObserver {
           brightness: tema,
         ),
         home: Scaffold(
+          drawer: login
+              ? Drawer(
+                  child: ListView(padding: EdgeInsets.zero, children: [
+                    UserAccountsDrawerHeader(
+                      accountName: Text(Login.user),
+                      accountEmail: null,
+                      currentAccountPicture: CircleAvatar(
+                        child: ClipOval(
+                          child: Image.asset(PreferenciaTema.logo,
+                              fit: BoxFit.cover),
+                        ),
+                      ),
+                    ),
+                    /*
+                    ListTile(
+                      leading: const Icon(Icons.logout),
+                      title: const Text('Logout'),
+                      onTap: () {
+                        setState(() {
+                          login = false;
+                          id = 0;
+                          settings = false;
+                        });
+                      },
+                    ), 
+                    */
+                    ListTile(
+                      leading: settings
+                          ? const Icon(Icons.arrow_back_rounded)
+                          : const Icon(Icons.settings),
+                      title: settings
+                          ? const Text('Voltar')
+                          : const Text('Configurações'),
+                      onTap: () {
+                        setState(() {
+                          settings = !settings;
+                        });
+                      },
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.info),
+                      title: const Text('Info'),
+                      onTap: () {},
+                    ),
+                  ]),
+                )
+              : null,
           appBar: login // testa se está logado, pra só então exibir a AppBar
               ? AppBar(
                   title: settings
                       ? const Text("Configurações")
                       : id == 0
-                          ? Text("Bem-vindo,  ${txtUsuario.text} - Tela 1")
-                          : Text("Bem-vindo,  ${txtUsuario.text} - Tela 2"),
+                          ? Text("Bem-vindo,  ${Login.user} - Tela 1")
+                          : Text("Bem-vindo,  ${Login.user} - Tela 2"),
                   actions: [
-                    PopupMenuButton(
+                      PopupMenuButton(
                         itemBuilder: (context) => [
-                              PopupMenuItem(
-                                  child: ListTile(
-                                leading: const Icon(Icons.logout),
-                                title: const Text('Logout'),
-                                onTap: () {
-                                  setState(() {
-                                    login = false;
-                                    txtUsuario.text = '';
-                                    txtSenha.text = '';
-                                    id = 0;
-                                    settings = false;
-                                  });
-                                },
-                              )),
-                              PopupMenuItem(
-                                  child: ListTile(
-                                leading: settings
-                                    ? const Icon(Icons.arrow_back_rounded)
-                                    : const Icon(Icons.settings),
-                                title: settings
-                                    ? const Text('Voltar')
-                                    : const Text('Configurações'),
-                                onTap: () {
-                                  setState(() {
-                                    settings = !settings;
-                                  });
-                                },
-                              )),
-                              PopupMenuItem(
-                                  child: ListTile(
-                                leading: const Icon(Icons.info),
-                                title: const Text('Info'),
-                                onTap: () {},
-                              ))
-                            ])
-                  ],
-                )
+                          PopupMenuItem(
+                              child: ListTile(
+                            leading: const Icon(Icons.logout),
+                            title: const Text('Logout'),
+                            onTap: () {
+                              setState(() {
+                                login = false;
+                                txtUsuario.text = '';
+                                txtSenha.text = '';
+                                id = 0;
+                                settings = false;
+                              });
+                            },
+                          )),
+                        ],
+                      )
+                    ])
               : null,
           body:
               login // testa se está logado, pra exibir a tela de login, ou as telas principais
@@ -187,12 +218,18 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                                       if (txtSenha.text == "123") {
                                         setState(() {
                                           login = true;
+                                          Login.user = txtUsuario.text;
+                                          txtUsuario.text = '';
+                                          txtSenha.text = '';
                                         });
                                       }
                                     } else if (txtUsuario.text == "admin") {
                                       if (txtSenha.text == "admin") {
                                         setState(() {
                                           login = true;
+                                          Login.user = txtUsuario.text;
+                                          txtUsuario.text = '';
+                                          txtSenha.text = '';
                                         });
                                       }
                                     }

@@ -1,4 +1,6 @@
 import 'package:armadillo_app/preferencia_tema.dart';
+
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
@@ -24,6 +26,20 @@ class _SettingsState extends State<Settings> {
         Image.asset(
           PreferenciaTema.logo,
           width: 200,
+        ),
+        ListTile(
+          leading: const Icon(Icons.bluetooth),
+          title: const Text('Bluetooth'),
+          onTap: () {
+            setState(() {});
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.miscellaneous_services),
+          title: const Text('- - -'),
+          onTap: () {
+            setState(() {});
+          },
         ),
       ],
     ));
