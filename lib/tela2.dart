@@ -1,14 +1,10 @@
 import 'package:armadillo_app/preferencia_tema.dart';
+import 'package:armadillo_app/atuadores.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 bool isCamera = false;
 String camera = 'LIGA';
-
-class Servos {
-  static double servoX = 0;
-  static double servoY = 0;
-}
 
 class Tela2 extends StatefulWidget {
   @override
@@ -80,35 +76,22 @@ class _Tela2State extends State<Tela2> {
               ),
             ],
           ),
-          Column(
+          Wrap(
+            direction: Axis.horizontal,
+            spacing: 20.0,
             children: [
-              const Text("Câmera",
-                  style: TextStyle(fontFamily: 'SpaceGrotesk')),
-              const SizedBox(
-                height: 10,
+              Column(
+                children: [
+                  const Text("Ativar Alarme",
+                      style: TextStyle(fontFamily: 'SpaceGrotesk')),
+                  Switch(
+                    value: Servos.alarme,
+                    onChanged: (alarme) {},
+                  ),
+                ],
               ),
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      isCamera ? camera = 'DESLIGA' : camera = 'LIGA';
-                      isCamera = !isCamera;
-                    });
-                  },
-                  child: Text(camera,
-                      style: const TextStyle(fontFamily: 'SpaceGrotesk'))),
-              const SizedBox(
-                height: 5,
-              ),
-              OutlinedButton(
-                  onPressed: () {
-                    if (isCamera) {
-                      // tirar foto
-                    }
-                  },
-                  child: const Text('TIRAR FOTO',
-                      style: TextStyle(fontFamily: 'SpaceGrotesk'))),
             ],
-          )
+          ),
         ],
       ),
     );
